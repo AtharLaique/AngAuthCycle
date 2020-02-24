@@ -28,8 +28,11 @@ export class AuthComponent implements OnInit {
        this.auth.login(form.value.email, form.value.password)
        .subscribe((resData)=>{
         console.log(resData)
+        this.isError=false;
       },(error)=>{
         console.log(error)
+        this.isError=true;
+        this.message=error.error.error.message;
       })
 
     }else{
