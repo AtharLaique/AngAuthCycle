@@ -26,5 +26,10 @@ export class AuthService {
            })
     }
      //Login
-    login(){}
+    login(email:string , password:string){
+        return this.http.post<AuthResponceData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAbg21E7AxSymXOccbQtnNjoVdIwYw9gnw',
+        { email:email,
+          password: password,
+          returnSecureToken:true})
+    }
 } 
