@@ -39,6 +39,7 @@ export class AuthService {
            const expirationDate=new Date( new Date().getDate()+ + resData.expiresIn*1000);
            const user= new User(resData.email ,  resData.localId ,resData.refreshToken ,expirationDate);
            this.user.next(user)
+           console.log(user)
 
         }))
     }
@@ -48,5 +49,14 @@ export class AuthService {
         { email:email,
           password: password,
           returnSecureToken:true})
+          .pipe( tap(resData=>{
+            console.log("tap")
+           console.log(resData)
+           const expirationDate=new Date( new Date().getDate()+ + resData.expiresIn*1000);
+           const user= new User(resData.email ,  resData.localId ,resData.refreshToken ,expirationDate);
+           this.user.next(user)
+           console.log(user)
+
+        }))
     }
 } 
