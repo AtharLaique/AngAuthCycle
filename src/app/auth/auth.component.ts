@@ -25,7 +25,7 @@ export class AuthComponent implements OnInit {
   onSubmit(form:NgForm){
     console.log(form.value)
     if(this.isLogin){
-      console.log('Login ')
+       this.auth.login(form.value.email, form.value.password)
 
     }else{
       this.auth.signup(form.value.email, form.value.password)
