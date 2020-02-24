@@ -9,6 +9,8 @@ import { AuthService } from './auth.service';
 })
 export class AuthComponent implements OnInit {
 
+  isError=false;
+  message=''
   isLogin=false;
 
   constructor(private auth :AuthService) { }
@@ -25,8 +27,10 @@ export class AuthComponent implements OnInit {
     this.auth.signup(form.value.email, form.value.password)
     .subscribe((resData)=>{
       console.log(resData)
+      this.isError=false;
     },(error)=>{
-       console.log(error)
+      this.isError=true;
+      this.message=error.error.error.message;
     })
 
   }
