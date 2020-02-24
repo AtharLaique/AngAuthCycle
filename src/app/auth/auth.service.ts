@@ -3,6 +3,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+interface AuthResponceData{
+    idToken:string,
+    email:string,
+    refreshToken:string,
+    expiresIn:string,
+    localId:string
+}
+
 
 //If we use providedIn, the injectable is registered as a provider of the Module without 
 //adding it to the providers of the module.
@@ -11,7 +19,7 @@ export class AuthService {
     constructor( private http:HttpClient){}
     //Signup
     signup(email:string , password:string){
-       return this.http.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAbg21E7AxSymXOccbQtnNjoVdIwYw9gnw',{
+       return this.http.post<AuthResponceData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAbg21E7AxSymXOccbQtnNjoVdIwYw9gnw',{
             email:email,
             password: password,
             returnSecureToken:true
