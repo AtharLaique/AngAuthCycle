@@ -2,6 +2,8 @@
 //This service is  responcible for user login and user signup and mnaging user data 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators'; 
+
 
 interface AuthResponceData{
     idToken:string,
@@ -24,6 +26,10 @@ export class AuthService {
             password: password,
             returnSecureToken:true
            })
+           .pipe( tap(resData=>{
+            console.log("tap")
+           console.log(resData)
+        }))
     }
      //Login
     login(email:string , password:string){
