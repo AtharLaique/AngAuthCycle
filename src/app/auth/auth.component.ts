@@ -33,7 +33,7 @@ export class AuthComponent implements OnInit {
       this.isError=true;
       this.message=error.error.error.message;
     })
-
+    form.reset()
   }
 
 }
