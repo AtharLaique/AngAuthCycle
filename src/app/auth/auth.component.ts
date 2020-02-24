@@ -28,6 +28,7 @@ export class AuthComponent implements OnInit {
     .subscribe((resData)=>{
       console.log(resData)
       this.isError=false;
+      this.onSwitch()
     },(error)=>{
       this.isError=true;
       this.message=error.error.error.message;
