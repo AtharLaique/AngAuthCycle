@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
-import { User } from './user.model';
-import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-auth',
@@ -10,11 +9,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  //we will store data using subject.
-  //Assing a <type / user> to Subject because Subject is a gnaric type.
-  //https://reactgo.com/angular-component-communication/
-  //https://stackoverflow.com/questions/47275385/what-are-pipe-and-tap-methods-in-angular-tutorial
-  user=new Subject<User>()
+  
   isError=false;
   message=''
   isLogin=false;
