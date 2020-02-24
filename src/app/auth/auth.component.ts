@@ -23,6 +23,11 @@ export class AuthComponent implements OnInit {
   onSubmit(form:NgForm){
     console.log(form.value)
     this.auth.signup(form.value.email, form.value.password)
+    .subscribe((resData)=>{
+      console.log(resData)
+    },(error)=>{
+       console.log(error)
+    })
 
   }
 
