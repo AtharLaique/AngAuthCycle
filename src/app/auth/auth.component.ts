@@ -26,6 +26,11 @@ export class AuthComponent implements OnInit {
     console.log(form.value)
     if(this.isLogin){
        this.auth.login(form.value.email, form.value.password)
+       .subscribe((resData)=>{
+        console.log(resData)
+      },(error)=>{
+        console.log(error)
+      })
 
     }else{
       this.auth.signup(form.value.email, form.value.password)
