@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
     constructor( private http:HttpClient){}
     //Signup
-    signup(){}
+    signup(email:string , password:string){}
      //Login
     login(){}
 } 
