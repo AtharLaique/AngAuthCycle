@@ -10,7 +10,13 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
     constructor( private http:HttpClient){}
     //Signup
-    signup(email:string , password:string){}
+    signup(email:string , password:string){
+        this.http.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAbg21E7AxSymXOccbQtnNjoVdIwYw9gnw',{
+            email:email,
+            password: password,
+            returnSecureToken:true
+           })
+    }
      //Login
     login(){}
 } 
