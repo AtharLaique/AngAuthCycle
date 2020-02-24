@@ -22,11 +22,12 @@
             class="btn btn-primary"
             type="submit"
           >
-          Login
+          {{isLogin ?  'Login' : 'Sign Up' }}
+         
           </button>
           |
-          <button class="btn btn-primary"  type="button">
-            Sign Up
+          <button class="btn btn-primary"  type="button" (click)='onSwitch()'>
+            Switch to {{!isLogin ?  'Login' : 'Sign Up' }}
           </button>
         </div>
       </form>

@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
 
+  isLogin=false;
+
   constructor() { }
 
   ngOnInit() {
+
+  }
+  onSwitch(){
+    this.isLogin=!this.isLogin;
+
   }
 
 }
