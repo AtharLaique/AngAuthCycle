@@ -3,6 +3,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators'; 
+import  { User } from './user.model';
 
 
 interface AuthResponceData{
@@ -29,7 +30,8 @@ export class AuthService {
            .pipe( tap(resData=>{
             console.log("tap")
            console.log(resData)
-           const expirationDate=new Date( new Date().getDate()+ + resData.expiresIn*1000)
+           const expirationDate=new Date( new Date().getDate()+ + resData.expiresIn*1000);
+           const user= new User(resData.email ,  resData.localId ,resData.refreshToken ,expirationDate);
 
         }))
     }
