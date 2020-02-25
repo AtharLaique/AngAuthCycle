@@ -8,7 +8,7 @@ export class User{
         private _tokenExpirationDate:Date 
     ){}
      //Access token
-     get (){
+     get token (){
         //Before return we want to check token time is expire or not
         if(this._tokenExpirationDate ||  new Date() > this._tokenExpirationDate )
         {

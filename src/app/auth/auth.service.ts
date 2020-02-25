@@ -87,5 +87,10 @@ export class AuthService {
        userData._token,
        new Date(userData._tokenExpirationDate)
      )
+
+     if(loadUser.token){
+       this.user.next(loadUser)
+     }
+
     }
 } 
