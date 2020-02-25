@@ -65,6 +65,7 @@ export class AuthService {
     logout(){
       this.user.next(null)
       this.router.navigate(['/auth'])
+      localStorage.removeItem('userData')
     }
     //auto-login
     autoLogin(){
@@ -90,5 +91,9 @@ export class AuthService {
        this.user.next(loadUser)
      }
 
+    }
+    //auto-logout
+    autoLogout(expirationTime:number){
+      
     }
 } 
