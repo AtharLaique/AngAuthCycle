@@ -7,6 +7,7 @@ import  { User } from './user.model';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { JsonPipe } from '@angular/common';
+import { Token } from '@angular/compiler/src/ml_parser/lexer';
 
 
 
@@ -70,10 +71,21 @@ export class AuthService {
     }
     //auto-login
     autoLogin(){
-     const userData=JSON.parse(localStorage.getItem('userData'))
+     const userData:{
+       email:string,
+       id:string,
+       _token:string,
+       _tokenExpirationDate:string
+     }=JSON.parse(localStorage.getItem('userData'))
      if(!userData)
      {
        return null;
      }
+     const loadUser=new User(
+       userData.email,
+       userData.id,
+       userData._token,
+       new Date(userData._tokenExpirationDate)
+     )
     }
 } 
