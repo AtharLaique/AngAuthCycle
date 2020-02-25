@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import  { User } from './user.model';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { JsonPipe } from '@angular/common';
 
 
 
@@ -69,6 +70,6 @@ export class AuthService {
     }
     //auto-login
     autoLogin(){
-      
+     const userData=JSON.parse(localStorage.getItem('userData'))
     }
 } 
