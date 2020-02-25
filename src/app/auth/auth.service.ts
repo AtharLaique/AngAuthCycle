@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators'; 
 import  { User } from './user.model';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 
 interface AuthResponceData{
@@ -25,7 +27,7 @@ export class AuthService {
   //https://reactgo.com/angular-component-communication/
   //https://stackoverflow.com/questions/47275385/what-are-pipe-and-tap-methods-in-angular-tutorial
   user=new Subject<User>()
-    constructor( private http:HttpClient){}
+    constructor( private http:HttpClient ,private router:Router){}
     //Signup
     signup(email:string , password:string){
        return this.http.post<AuthResponceData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAbg21E7AxSymXOccbQtnNjoVdIwYw9gnw',{
@@ -61,5 +63,6 @@ export class AuthService {
     }
     logout(){
       this.user.next(null)
+      this.router.navigate(['/auth'])
     }
 } 
