@@ -94,6 +94,8 @@ export class AuthService {
     }
     //auto-logout
     autoLogout(expirationTime:number){
-      
+       setTimeout(()=>{
+         this.logout()
+       },expirationTime)
     }
 } 
