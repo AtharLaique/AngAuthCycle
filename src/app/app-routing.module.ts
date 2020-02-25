@@ -32,7 +32,7 @@ const appRoutes: Routes = [
     ]
   },
   { path: 'shopping-list', component: ShoppingListComponent },
-  { path: 'auth', component: AuthComponent }
+  { path: 'auth', canActivate:[AuthGuard], component: AuthComponent }
 ];
 
 @NgModule({
