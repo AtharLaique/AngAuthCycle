@@ -62,8 +62,13 @@ export class AuthService {
 
         }))
     }
+    //logout
     logout(){
       this.user.next(null)
       this.router.navigate(['/auth'])
+    }
+    //auto-login
+    autoLogin(){
+      
     }
 } 
