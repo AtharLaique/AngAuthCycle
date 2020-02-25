@@ -95,11 +95,15 @@ export class AuthService {
       console.log('autologin')
       console.log(loadUser)
        this.user.next(loadUser)
+       //calculate the remaining time
+       const expireAfter=
+       new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+       console.log(expireAfter)
      }
 
     }
     //auto-logout
-    autoLogout(expirationTime:number){
+    autoLogout(expirationTime:number){ 
       this.expireToken= setTimeout(()=>{
          this.logout()
        },expirationTime)
