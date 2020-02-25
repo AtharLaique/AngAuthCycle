@@ -57,6 +57,7 @@ export class AuthService {
            const expirationDate=new Date( new Date().getDate()+ + resData.expiresIn*1000);
            const user= new User(resData.email ,  resData.localId ,resData.refreshToken ,expirationDate);
            this.user.next(user)
+           localStorage.setItem('userData',JSON.stringify(user))
            console.log(user)
 
         }))
