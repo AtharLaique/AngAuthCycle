@@ -7,7 +7,7 @@ import {
 from "@angular/router";
 
 import {Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { map, take } from 'rxjs/operators'
 import {AuthService} from './auth.service';
 import {Injectable} from '@angular/core'
 //Step 4.1 inject the service
@@ -21,7 +21,9 @@ export class AuthGuard implements CanActivate{
     {
         console.log(route.url[0].path)
         if(route.url[0].path!='auth'){
-            return this.auth.user.pipe(map(user=>{
+            return this.auth.user.pipe(
+                take(1),
+                map(user=>{
                 const isAuth=!!user;
                 if(isAuth)
                 {
@@ -33,7 +35,9 @@ export class AuthGuard implements CanActivate{
             }))
         }
         else{
-            return this.auth.user.pipe(map(user=>{
+            return this.auth.user.pipe(
+                take(1),
+                map(user=>{
                 const isAuth=!!user;
                 if(isAuth)
                 {
