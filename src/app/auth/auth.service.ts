@@ -4,12 +4,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators'; 
 import  { User } from './user.model';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
-import { JsonPipe } from '@angular/common';
-import { Token } from '@angular/compiler/src/ml_parser/lexer';
-
-
 
 interface AuthResponceData{
     idToken:string,
@@ -28,7 +24,7 @@ export class AuthService {
   //Assing a <type / user> to Subject because Subject is a gnaric type.
   //https://reactgo.com/angular-component-communication/
   //https://stackoverflow.com/questions/47275385/what-are-pipe-and-tap-methods-in-angular-tutorial
-  user=new Subject<User>()
+  user = new BehaviorSubject<User>(null);
     constructor( private http:HttpClient ,private router:Router){}
     //Signup
     signup(email:string , password:string){
@@ -40,28 +36,29 @@ export class AuthService {
            .pipe( tap(resData=>{
             console.log("tap")
            console.log(resData)
-           const expirationDate=new Date( new Date().getDate()+ + resData.expiresIn*1000);
+           const expirationDate=new Date( new Date().getTime()+ + resData.expiresIn*1000);
            const user= new User(resData.email ,  resData.localId ,resData.refreshToken ,expirationDate);
-           this.user.next(user)
-           console.log(user)
-
+          
         }))
     }
      //Login
     login(email:string , password:string){
-        return this.http.post<AuthResponceData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAbg21E7AxSymXOccbQtnNjoVdIwYw9gnw',
-        { email:email,
+        return this.http.post<AuthResponceData>(
+          'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAbg21E7AxSymXOccbQtnNjoVdIwYw9gnw',
+        { 
+          email:email,
           password: password,
-          returnSecureToken:true})
-          .pipe( tap(resData=>{
-            console.log("tap")
-           console.log(resData)
-           const expirationDate=new Date( new Date().getDate()+ + resData.expiresIn*1000);
+          returnSecureToken:true
+        })
+          .pipe( 
+            tap(resData=>{
+           const expirationDate=new Date( new Date().getTime()+ + resData.expiresIn*1000);
+           console.log(expirationDate)
            const user= new User(resData.email ,  resData.localId ,resData.refreshToken ,expirationDate);
+           console.log('Login Data');
+           console.log(user)
            this.user.next(user)
            localStorage.setItem('userData',JSON.stringify(user))
-           console.log(user)
-
         }))
     }
     //logout
@@ -87,8 +84,9 @@ export class AuthService {
        userData._token,
        new Date(userData._tokenExpirationDate)
      )
-
      if(loadUser.token){
+      console.log('autologin')
+      console.log(loadUser)
        this.user.next(loadUser)
      }
 
