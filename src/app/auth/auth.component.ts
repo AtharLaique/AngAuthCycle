@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -14,7 +16,7 @@ export class AuthComponent implements OnInit {
   message=''
   isLogin=false;
 
-  constructor(private auth :AuthService) { }
+  constructor(private auth :AuthService , private router:Router) { }
 
   ngOnInit() {
 
@@ -29,6 +31,9 @@ export class AuthComponent implements OnInit {
        this.auth.login(form.value.email, form.value.password)
        .subscribe((resData)=>{
         console.log(resData)
+        //Phase 4: We can redirect in an service but 
+        // we don't want to intract with our interface in serice. so here
+        this.router.navigate(['/recipes'])
         this.isError=false;
       },(error)=>{
         console.log(error)
