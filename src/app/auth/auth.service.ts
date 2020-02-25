@@ -98,7 +98,7 @@ export class AuthService {
        //calculate the remaining time
        const expireAfter=
        new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
-       console.log(expireAfter)
+       this.autoLogout(expireAfter)
      }
 
     }
