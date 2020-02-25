@@ -59,6 +59,7 @@ export class AuthService {
            console.log('Login Data');
            console.log(user)
            this.user.next(user)
+           this.autoLogout(+resData.expiresIn*1000)
            localStorage.setItem('userData',JSON.stringify(user))
         }))
     }
