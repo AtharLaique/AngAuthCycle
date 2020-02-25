@@ -25,6 +25,7 @@ export class AuthService {
   //https://reactgo.com/angular-component-communication/
   //https://stackoverflow.com/questions/47275385/what-are-pipe-and-tap-methods-in-angular-tutorial
   user = new BehaviorSubject<User>(null);
+  private expireToken:any;
     constructor( private http:HttpClient ,private router:Router){}
     //Signup
     signup(email:string , password:string){
@@ -65,7 +66,11 @@ export class AuthService {
     logout(){
       this.user.next(null)
       this.router.navigate(['/auth'])
-      localStorage.removeItem('userData')
+      localStorage.removeItem('userData');
+      if(this.expireToken){
+        clearTimeout(this.expireToken)
+      }
+      this.expireToken=null;
     }
     //auto-login
     autoLogin(){
@@ -94,7 +99,7 @@ export class AuthService {
     }
     //auto-logout
     autoLogout(expirationTime:number){
-       setTimeout(()=>{
+      this.expireToken= setTimeout(()=>{
          this.logout()
        },expirationTime)
     }
